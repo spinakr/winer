@@ -1,6 +1,7 @@
 NUGET
   remote: https://www.nuget.org/api/v2
     dbup (3.3.5)
+    FAKE (4.64.3)
     Microsoft.DotNet.Watcher.Tools (2.0) - clitool: true
       Microsoft.NETCore.App (>= 2.0) - restriction: >= netcoreapp2.0
     Microsoft.NETCore.App (2.0.4) - restriction: >= netcoreapp2.0

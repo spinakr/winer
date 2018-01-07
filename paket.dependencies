@@ -1,5 +1,7 @@
 source https://nuget.org/api/v2
 
+nuget FAKE
+
 nuget DbUp
 nuget System.Data.SqlClient
 
