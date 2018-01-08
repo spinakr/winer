@@ -1,4 +1,6 @@
 version: "3"
+volumes:
+    mssqldata:
 services:
     web:
         build: src/app
@@ -18,6 +20,8 @@ services:
             - db
     db:
         image: "microsoft/mssql-server-linux"
+        volumes:
+            - mssqldata:/var/lib/mssql
         ports:
             - "1401:1433"
         environment:
