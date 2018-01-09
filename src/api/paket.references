@@ -1,1 +1,5 @@
+Dapper
+Dapper.SimpleCRUD
+System.Data.SqlClient
+
 Microsoft.DotNet.Watcher.Tools
