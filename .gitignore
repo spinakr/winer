@@ -7,6 +7,7 @@ notes.txt
 [Oo]bj/
 [Bb]in/
 build/
+[oO]ut/
 deploy/
 paket-files/
 packages/
@@ -33,6 +34,8 @@ autom4te.cache/
 tarballs/
 test-results/
 Thumbs.db
+*.dll
+*.pdb
 
 # Mac bundle stuff
 *.dmg

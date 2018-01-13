@@ -11,6 +11,7 @@ public class WineInfo : TableEntity
     }
 
     public string Name { get; set; }
+    public DateTime Timestamp { get; set; }
     public string VinmonopoletId { get; set; }
     public string Vintage { get; set; }
     public string Type { get; set; }

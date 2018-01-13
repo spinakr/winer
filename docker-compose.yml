@@ -1,6 +1,4 @@
 version: "3"
-volumes:
-    mssqldata:
 services:
     web:
         build: src/app
@@ -23,7 +21,10 @@ services:
         volumes:
             - mssqldata:/var/lib/mssql
         ports:
-            - "1401:1433"
+            - "1433:1433"
         environment:
             SA_PASSWORD: "Qwer1234*"
             ACCEPT_EULA: "Y"
+
+volumes:
+    mssqldata:

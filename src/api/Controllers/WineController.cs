@@ -16,7 +16,7 @@ namespace api.Controllers
         public IActionResult Get()
         {
 
-            using (var db = new SqlConnection(@"Server=localhost,1401;Database=winer;User Id=SA; Password=Qwer1234*;"))
+            using (var db = new SqlConnection(@"Server=db;Database=winer;User Id=SA; Password=Qwer1234*;"))
             {
                 var wines = db.GetList<Wine>();
 
