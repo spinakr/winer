@@ -23,11 +23,11 @@ namespace azuremigration
 
             var result = table.ExecuteQuerySegmentedAsync(query, continuationToken).Result;
 
-            using (var db = new SqlConnection(@"Server=localhost,1401;Database=winer;User Id=SA; Password=Qwer1234*;"))
+            using (var db = new SqlConnection(@"Server=localhost,1433;Database=winer;User Id=SA; Password=Qwer1234*;"))
             {
                 foreach (var wine in result)
                 {
-                    db.Insert(new Wine
+                    var dbWine = new Wine
                     {
                         Name = wine.Name,
                         VinmonopoletId = wine.VinmonopoletId,
@@ -42,7 +42,21 @@ namespace azuremigration
                         Fruit = wine.Fruit,
                         Storage = wine.Storage,
                         BoughtDate = ParseDateTimeString(wine.BoughtDate)
-                    });
+                    };
+                    var dbWineId = db.Insert(dbWine);
+
+                    if (wine.Status == "archive")
+                    {
+                        var tastingNote = new TastingNote
+                        {
+                            WineId = dbWineId.Value,
+                            Note = wine.Note,
+                            Occation = wine.Occation,
+                            ConsumptionDate = wine.Timestamp.DateTime
+                        };
+                        db.Insert(tastingNote);
+                    }
+
                 }
             }
 
