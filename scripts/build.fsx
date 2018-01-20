@@ -40,6 +40,8 @@ Target "Clean" ( fun _ ->
 Target "BuildApp" (fun _ ->
     runYarn appPath ""
     runYarn appPath "build"
+    CreateDir (apiOutPath + "/wwwroot")
+    CopyDir (apiOutPath + "/wwwroot") appOutPath allFiles
 )
 
 Target "BuildDatabase" (fun _ ->

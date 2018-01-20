@@ -9,11 +9,11 @@ namespace database
     {
         static int Main(string[] args)
         {
-            Console.WriteLine(args.FirstOrDefault());
             var connectionString =
                 args.FirstOrDefault()
-                ?? @"Server=localhost,1401;Database=winer;User Id=SA; Password=Qwer1234*";
+                ?? @"Server=localhost;Database=winer;User Id=SA;Password=Qwer1234*";
 
+            Console.WriteLine(connectionString);
             EnsureDatabase.For.SqlDatabase(connectionString);
 
             var upgrader =

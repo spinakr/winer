@@ -23,7 +23,8 @@ namespace azuremigration
 
             var result = table.ExecuteQuerySegmentedAsync(query, continuationToken).Result;
 
-            using (var db = new SqlConnection(@"Server=localhost,1433;Database=winer;User Id=SA; Password=Qwer1234*;"))
+            // using (var db = new SqlConnection(@"Server=45.55.68.40;Database=winer;User Id=SA; Password=Qwer1234*;"))
+            using (var db = new SqlConnection(@"Server=localhost;Database=winer;User Id=SA; Password=Qwer1234*;"))
             {
                 foreach (var wine in result)
                 {

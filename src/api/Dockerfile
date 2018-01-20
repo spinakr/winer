@@ -3,5 +3,5 @@ COPY /out /app
 WORKDIR /app
 
 
-EXPOSE 8080
+EXPOSE 80
 ENTRYPOINT ["dotnet", "api.dll"]

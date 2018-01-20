@@ -33,8 +33,9 @@ namespace api
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseMvc();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
         }
     }
 }
