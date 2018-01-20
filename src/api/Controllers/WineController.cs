@@ -13,12 +13,12 @@ namespace api.Controllers
     public class WineController : Controller
     {
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(int page = 1, int pageCount = 9)
         {
 
             using (var db = new SqlConnection(@"Server=db;Database=winer;User Id=SA; Password=Qwer1234*;"))
             {
-                var wines = db.GetList<Wine>();
+                var wines = db.GetListPaged<Wine>(page, pageCount, "WHERE Status=1", "boughtDate desc");
 
                 return Ok(wines);
             }
