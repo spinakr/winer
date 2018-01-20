@@ -1,21 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
-import wineService from "./api/wine";
+import WineInventory from "./containers/InventoryContainer";
 
 class App extends Component {
-  componentDidMount() {
-    wineService
-      .get()
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
   render() {
-    return <div className="App">My App!</div>;
+    return (
+      <div className="AppContainer">
+        <h1>Winer</h1>
+        <WineInventory />
+      </div>
+    );
   }
 }
 
