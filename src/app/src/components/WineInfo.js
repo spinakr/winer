@@ -5,7 +5,9 @@ const WineInfo = ({ wine }) => {
   return (
     <div className="wineInfoContainer">
       <div className="col-one centered-text">
-        <div style={{ minHeight: "70px" }}>{wine.name}</div>
+        <div style={{ minHeight: "70px" }}>
+          <h3>{wine.name}</h3>
+        </div>
         <div>
           {wine.type} - {wine.vintage}
         </div>
