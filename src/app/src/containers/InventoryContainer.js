@@ -1,34 +1,57 @@
 import React, { Component } from "react";
 import wineService from "../api/wine";
 import WineList from "../components/WineList";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+const validStatuses = ["/", "/archive", "/shoppinglist"];
+const pageSize = 12;
 
 class InventoryContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wines: []
+      wines: [],
+      currentPage: 0,
+      count: 0
     };
+    this.fetchMoreWines = this.fetchMoreWines.bind(this);
   }
 
-  validStatuses = ["/", "/archive", "/shoppinglist"];
+  fetchMoreWines() {
+    const newPage = this.state.currentPage + 1;
+    wineService
+      .get(
+        `${this.props.location.pathname}?page=${newPage}&pageCount=${pageSize}`
+      )
+      .then(response => {
+        console.log(response);
+        this.setState({
+          wines: this.state.wines.concat(response.data.wines),
+          count: response.data.count,
+          currentPage: newPage
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   componentDidMount() {
-    if (this.validStatuses.some(s => s === this.props.location.pathname)) {
-      wineService
-        .get(this.props.location.pathname)
-        .then(response => {
-          console.log(response);
-          this.setState({
-            wines: response.data
-          });
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    if (validStatuses.some(s => s === this.props.location.pathname)) {
+      this.fetchMoreWines();
     }
   }
+
   render() {
-    return <WineList wines={this.state.wines} />;
+    return (
+      <InfiniteScroll
+        next={this.fetchMoreWines}
+        hasMore={this.state.currentPage * pageSize < this.state.count}
+        loader={<h4>Loading...</h4>}
+      >
+        <WineList wines={this.state.wines} />
+      </InfiniteScroll>
+    );
   }
 }
 

@@ -33,18 +33,18 @@ namespace api.Controllers
             return Ok(GetWinesWithStatus(3, page, pageCount));
         }
 
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return $"her is {id}";
-        }
-
-        public IEnumerable<Wine> GetWinesWithStatus(int status, int page, int pageCount)
+        public dynamic GetWinesWithStatus(int status, int page, int pageCount)
         {
             using (var db = new SqlConnection(@"Server=db;Database=winer;User Id=SA; Password=Qwer1234*;"))
             {
                 var wines = db.GetListPaged<Wine>(page, pageCount, $"WHERE Status={status}", "boughtDate desc");
-                return wines;
+                var count = db.RecordCount<Wine>($"WHERE Status={status}");
+
+                return new 
+                {
+                    wines,
+                    count
+                };
             }
         }
     }
