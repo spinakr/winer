@@ -15,6 +15,9 @@ const Navigation = () => {
       <Link to="/archive">
         <i className="fa fa-archive fa-3x nav-item" />
       </Link>
+      <Link to="/addnew">
+        <i className="fa fa-plus-square fa-3x nav-item" />
+      </Link>
     </div>
   );
 };

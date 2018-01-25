@@ -33,6 +33,13 @@ namespace api.Controllers
             return Ok(GetWinesWithStatus(3, page, pageCount));
         }
 
+        [HttpPost]
+        [Route("")]
+        public IActionResult AddNewWine([FromBody]dynamic request)
+        {
+            return Ok(new {wineName = "testWine"});
+        }
+
         public dynamic GetWinesWithStatus(int status, int page, int pageCount)
         {
             using (var db = new SqlConnection(@"Server=db;Database=winer;User Id=SA; Password=Qwer1234*;"))
