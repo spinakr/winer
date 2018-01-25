@@ -4,6 +4,7 @@ import "./App.css";
 import WineInventory from "./containers/InventoryContainer";
 import Navigation from "./components/Navigation";
 import AddNewWineContainer from "./containers/AddNewWineContainer";
+import SearchWineContainer from "./containers/SearchWineContainer";
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
             <Route exact path="/shoppinglist" component={WineInventory} />
             <Route exact path="/archive" component={WineInventory} />
             <Route exact path="/addnew" component={AddNewWineContainer} />
+            <Route exact path="/search" component={SearchWineContainer} />
             <Navigation />
           </div>
         </Router>

@@ -32,37 +32,66 @@ namespace api.Controllers
         {
             return Ok(GetWinesWithStatus(3, page, pageCount));
         }
+        
+        [HttpGet]
+        [Route("{vinmonopoletId}")]
+        public IActionResult SearchWine(string vinmonopoletId)
+        {
+            var wineInfo = GetVinmonopoletWine(vinmonopoletId);
+
+            if (wineInfo is null)
+            {
+                return NotFound("Wine not found in vinmonopolet data");
+            }
+            return Ok(MapWineInfoToWine(wineInfo));
+        }
 
         [HttpPost]
         [Route("")]
         public IActionResult AddNewWine([FromBody]AddWineRequest request)
         {
+            var wineInfo = GetVinmonopoletWine(request.VinmonopoletId);
+
+            if (wineInfo is null)
+            {
+                return NotFound("Wine not found in vinmonopolet data");
+            }
+
+            var wine = MapWineInfoToWine(wineInfo);
+            
+            //Save to db
+
+            return Ok(wine);
+        }
+
+        public VinmonopoletWine GetVinmonopoletWine(string vinmonopoletId)
+        {
             using (var db = new SqlConnection(@"Server=db;Database=winer;User Id=SA; Password=Qwer1234*;"))
             {
                 var wineInfo = db.GetList<VinmonopoletWine>(
                     "WHERE VinmonopoletId = @VinmonopoletId",
-                    new { VinmonopoletId = request.VinmonopoletId }).FirstOrDefault();
+                    new { VinmonopoletId = vinmonopoletId }).FirstOrDefault();
 
-                if (wineInfo is null)
-                {
-                    return NotFound("Wine not found in vinmonopolet data");
-                }
-
-                return Ok(new Wine
-                {
-                    VinmonopoletId = wineInfo.VinmonopoletId,
-                    Name = wineInfo.Navn,
-                    Status = 1,
-                    Vintage = wineInfo.Argang,
-                    Type = wineInfo.Varetype,
-                    Producer = wineInfo.Produsent,
-                    Country = wineInfo.Land,
-                    Area = wineInfo.Distrikt,
-                    Fruit = wineInfo.Rastoff,
-                    Price = wineInfo.Pris,
-                    BoughtDate = DateTime.Today
-                });
+                return wineInfo;
             }
+        }
+
+        public Wine MapWineInfoToWine(VinmonopoletWine wineInfo)
+        {
+            return new Wine
+            {
+                VinmonopoletId = wineInfo.VinmonopoletId,
+                Name = wineInfo.Navn,
+                Status = 1,
+                Vintage = wineInfo.Argang,
+                Type = wineInfo.Varetype,
+                Producer = wineInfo.Produsent,
+                Country = wineInfo.Land,
+                Area = wineInfo.Distrikt,
+                Fruit = wineInfo.Rastoff,
+                Price = wineInfo.Pris,
+                BoughtDate = DateTime.Today
+            };
         }
 
         public dynamic GetWinesWithStatus(int status, int page, int pageCount)
