@@ -35,9 +35,34 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("")]
-        public IActionResult AddNewWine([FromBody]dynamic request)
+        public IActionResult AddNewWine([FromBody]AddWineRequest request)
         {
-            return Ok(new {wineName = "testWine"});
+            using (var db = new SqlConnection(@"Server=db;Database=winer;User Id=SA; Password=Qwer1234*;"))
+            {
+                var wineInfo = db.GetList<VinmonopoletWine>(
+                    "WHERE VinmonopoletId = @VinmonopoletId",
+                    new { VinmonopoletId = request.VinmonopoletId }).FirstOrDefault();
+
+                if (wineInfo is null)
+                {
+                    return NotFound("Wine not found in vinmonopolet data");
+                }
+
+                return Ok(new Wine
+                {
+                    VinmonopoletId = wineInfo.VinmonopoletId,
+                    Name = wineInfo.Navn,
+                    Status = 1,
+                    Vintage = wineInfo.Argang,
+                    Type = wineInfo.Varetype,
+                    Producer = wineInfo.Produsent,
+                    Country = wineInfo.Land,
+                    Area = wineInfo.Distrikt,
+                    Fruit = wineInfo.Rastoff,
+                    Price = wineInfo.Pris,
+                    BoughtDate = DateTime.Today
+                });
+            }
         }
 
         public dynamic GetWinesWithStatus(int status, int page, int pageCount)
@@ -47,12 +72,17 @@ namespace api.Controllers
                 var wines = db.GetListPaged<Wine>(page, pageCount, $"WHERE Status={status}", "boughtDate desc");
                 var count = db.RecordCount<Wine>($"WHERE Status={status}");
 
-                return new 
+                return new
                 {
                     wines,
                     count
                 };
             }
+        }
+
+        public class AddWineRequest
+        {
+            public string VinmonopoletId { get; set; }
         }
     }
 }

@@ -16,8 +16,9 @@ class AddNewWineContainer extends Component {
     wineService
       .post("", state)
       .then(response => {
+        console.log(response);
         this.setState({
-          successMessage: response.data.wineName
+          successMessage: response.data.name
         });
         setTimeout(() => {
           this.setState({

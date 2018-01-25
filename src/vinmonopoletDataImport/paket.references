@@ -1,0 +1,4 @@
+CsvHelper
+Dapper
+Dapper.SimpleCRUD
+System.Data.SqlClient

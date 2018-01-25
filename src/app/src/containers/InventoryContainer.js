@@ -24,7 +24,6 @@ class InventoryContainer extends Component {
         `${this.props.location.pathname}?page=${newPage}&pageCount=${pageSize}`
       )
       .then(response => {
-        console.log(response);
         this.setState({
           wines: this.state.wines.concat(response.data.wines),
           count: response.data.count,

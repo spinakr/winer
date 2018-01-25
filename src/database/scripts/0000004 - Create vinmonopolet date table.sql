@@ -1,0 +1,35 @@
+CREATE TABLE VinmonopoletWine
+(
+    ID int NOT NULL IDENTITY(1,1),
+    VinmonopoletId int NOT NULL,
+    Navn VARCHAR(2000),
+    Pris float,
+    Varetype VARCHAR(500),
+    Produktutvalg VARCHAR(300),
+
+    Land VARCHAR(1000),
+    Distrikt VARCHAR(1000),
+    Underdistrikt VARCHAR(1000),
+    Produsent VARCHAR(1000),
+    Vareurl VARCHAR(2000),
+    Argang VARCHAR(10),
+    Rastoff VARCHAR(2000),
+    Metode VARCHAR(2000),
+    Lagringsgrad VARCHAR(300),
+    Alkohol float,
+    Sukker VARCHAR(200),
+    Syre VARCHAR(200),
+
+    Farge VARCHAR(1000),
+    Lukt VARCHAR(1000),
+    Smak VARCHAR(1000),
+    Passertil1 VARCHAR(1000),
+    Passertil2 VARCHAR(1000),
+    Passertil3 VARCHAR(1000),
+    
+    Fylde int,
+    Friskhet int,
+    Garvestoffer int,
+    Bitterhet int,
+    Sodme int,
+)

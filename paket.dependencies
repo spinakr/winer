@@ -5,9 +5,9 @@ nuget FAKE
 nuget DbUp
 nuget System.Data.SqlClient
 nuget WindowsAzure.Storage
-nuget System.Data.SqlClient
 nuget Dapper
 nuget Dapper.SimpleCRUD
+nuget CsvHelper
 
 
 clitool Microsoft.DotNet.Watcher.Tools
