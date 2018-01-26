@@ -1,57 +1,54 @@
 import React, { Component } from "react";
-import wineService from "../api/wine";
+import { connect } from "react-redux";
 import WineList from "../components/WineList";
 import InfiniteScroll from "react-infinite-scroll-component";
+import {
+  FETCH_MORE_WINES_REQUEST,
+  CLEAR_WINES_LIST
+} from "../reducers/wineListReducer";
 
 const validStatuses = ["/", "/archive", "/shoppinglist"];
 const pageSize = 12;
 
 class WineListContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      wines: [],
-      currentPage: 0,
-      count: 0
-    };
-    this.fetchMoreWines = this.fetchMoreWines.bind(this);
-  }
-
-  fetchMoreWines() {
-    const newPage = this.state.currentPage + 1;
-    wineService
-      .get(
-        `${this.props.location.pathname}?page=${newPage}&pageCount=${pageSize}`
-      )
-      .then(response => {
-        this.setState({
-          wines: this.state.wines.concat(response.data.wines),
-          count: response.data.count,
-          currentPage: newPage
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  status = this.props.location.pathname;
 
   componentDidMount() {
-    if (validStatuses.some(s => s === this.props.location.pathname)) {
-      this.fetchMoreWines();
+    this.props.clearWines();
+    if (validStatuses.some(s => s === this.status)) {
+      this.props.fetchMoreWines(this.status)();
     }
   }
 
   render() {
     return (
       <InfiniteScroll
-        next={this.fetchMoreWines}
-        hasMore={this.state.currentPage * pageSize < this.state.count}
+        next={this.props.fetchMoreWines(this.status)}
+        hasMore={this.props.currentPage * pageSize < this.props.count}
         loader={<h4>Loading...</h4>}
       >
-        <WineList wines={this.state.wines} />
+        <WineList wines={this.props.wines} />
       </InfiniteScroll>
     );
   }
 }
 
-export default WineListContainer;
+const mapStateToProps = state => ({
+  wines: state.wineList.wines,
+  count: state.wineList.count,
+  currentPage: state.wineList.currentPage
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    clearWines: () => {
+      dispatch({ type: CLEAR_WINES_LIST });
+    },
+
+    fetchMoreWines: status => () => {
+      dispatch({ type: FETCH_MORE_WINES_REQUEST, payload: { status } });
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WineListContainer);

@@ -16,7 +16,6 @@ class AddNewWineContainer extends Component {
     wineService
       .post("", state)
       .then(response => {
-        console.log(response);
         this.setState({
           successMessage: response.data.name
         });
@@ -27,7 +26,6 @@ class AddNewWineContainer extends Component {
         }, 3000);
       })
       .catch(error => {
-        console.log(error);
         this.setState({
           errorMessage: "adding wine failed"
         });

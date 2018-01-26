@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import addWineFormReducer from "./addWineForm";
+import addWineForm from "./addWineForm";
+import wineList from "./wineListReducer";
 
 export default combineReducers({
-  addWineFormReducer
+  addWineForm,
+  wineList
 });

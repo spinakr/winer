@@ -16,13 +16,11 @@ class SearchWineContainer extends Component {
     wineService
       .get(state.vinmonopoletId)
       .then(response => {
-        console.log(response.data);
         this.setState({
           wine: response.data
         });
       })
       .catch(error => {
-        console.log(error);
         this.setState({
           errorMessage: "adding wine failed"
         });
