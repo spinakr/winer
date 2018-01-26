@@ -6,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 const validStatuses = ["/", "/archive", "/shoppinglist"];
 const pageSize = 12;
 
-class InventoryContainer extends Component {
+class WineListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -54,4 +54,4 @@ class InventoryContainer extends Component {
   }
 }
 
-export default InventoryContainer;
+export default WineListContainer;
