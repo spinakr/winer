@@ -16,6 +16,10 @@
   }
 }
 
+.search-result {
+  grid-column: 2;
+}
+
 .wineInfoContainer {
   background: white;
   border: solid;
@@ -23,6 +27,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
+
 
 .col-one {
   grid-column: 1 / 5;

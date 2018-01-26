@@ -37,18 +37,18 @@ class SearchWineContainer extends Component {
   render() {
     if (this.state.wine) {
       return (
-        <div>
-          <WineInfo wine={this.state.wine} />
+        <div className="wineList">
+          <div className="search-result">
+            <WineInfo wine={this.state.wine} />
+          </div>
         </div>
       );
     }
     return (
-      <div>
-        <AddWineForm
-          addNewWine={this.addNewWine}
-          errorMessage={this.state.errorMessage}
-        />
-      </div>
+      <AddWineForm
+        addNewWine={this.addNewWine}
+        errorMessage={this.state.errorMessage}
+      />
     );
   }
 }

@@ -4,9 +4,8 @@ button, input, select, textarea {
 }
 
 .wine-form {
-    display: block; 
     margin: 0 auto;
-    margin-bottom: 10px;
+    width: 400px;
 }
 
 input[type=text] {

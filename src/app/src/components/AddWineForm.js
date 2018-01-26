@@ -35,20 +35,17 @@ class AddWineForm extends Component {
     }
 
     return (
-      <div>
+      <div className="wine-form">
+        <h2>Search Wine</h2>
         <input
           type="text"
           name="vinmonopoletId"
-          className="wine-form"
           placeholder="Vinmonopolet id"
           onChange={this.handleFormChanged}
           value={this.state.vinmonopoletId}
         />
-        <button
-          className="submit-button wine-form"
-          onClick={this.handleSubmitClicked}
-        >
-          Save
+        <button className="submit-button" onClick={this.handleSubmitClicked}>
+          Search
         </button>
       </div>
     );
