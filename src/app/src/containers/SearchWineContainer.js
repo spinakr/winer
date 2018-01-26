@@ -1,54 +1,46 @@
 import React, { Component } from "react";
-import AddWineForm from "../components/AddWineForm";
+import { connect } from "react-redux";
+import SearchForm from "../components/SearchForm";
 import WineInfo from "../components/WineInfo";
-import wineService from "../api/wine";
+import {
+  SEARCH_WINE_REQUEST,
+  CLEAR_SEARCH_LIST
+} from "../reducers/addWineReducer";
 
 class SearchWineContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.addNewWine = this.addNewWine.bind(this);
-    this.state = {
-      errorMessage: ""
-    };
-  }
-
-  addNewWine(state) {
-    wineService
-      .get(state.vinmonopoletId)
-      .then(response => {
-        this.setState({
-          wine: response.data
-        });
-      })
-      .catch(error => {
-        this.setState({
-          errorMessage: "adding wine failed"
-        });
-        setTimeout(() => {
-          this.setState({
-            errorMessage: ""
-          });
-        }, 3000);
-      });
-  }
-
   render() {
-    if (this.state.wine) {
-      return (
-        <div className="wineList">
-          <div className="search-result">
-            <WineInfo wine={this.state.wine} />
-          </div>
-        </div>
-      );
-    }
     return (
-      <AddWineForm
-        addNewWine={this.addNewWine}
-        errorMessage={this.state.errorMessage}
-      />
+      <div>
+        <SearchForm searchWine={this.props.searchWine} />
+
+        {this.props.searchedWines.length > 0 ? (
+          <div className="wineList">
+            <div className="search-result">
+              <WineInfo wine={this.props.searchedWines[0]} />
+            </div>
+          </div>
+        ) : null}
+      </div>
     );
   }
 }
 
-export default SearchWineContainer;
+const mapStateToProps = state => ({
+  searchedWines: state.addWine.searchedWines
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    clearWines: () => {
+      dispatch({ type: CLEAR_SEARCH_LIST });
+    },
+
+    searchWine: vinmonopoletId => {
+      dispatch({ type: SEARCH_WINE_REQUEST, payload: { vinmonopoletId } });
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  SearchWineContainer
+);

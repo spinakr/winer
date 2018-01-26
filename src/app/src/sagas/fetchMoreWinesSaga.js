@@ -4,12 +4,12 @@ import {
   FETCH_MORE_WINES_SUCCEEDED,
   FETCH_MORE_WINES_FAILED
 } from "../reducers/wineListReducer";
-import { fetchMoreWinesFromApi } from "../api/wineService";
+import readService from "../api/wineReadService";
 
 function* fetchMoreWines(action) {
   const page = yield select(state => state.wineList.currentPage);
   const response = yield call(
-    fetchMoreWinesFromApi,
+    readService.fetchMoreWinesFromApi,
     action.payload.status,
     page
   );
