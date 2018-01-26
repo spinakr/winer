@@ -1,7 +1,6 @@
 .wineList {
   display: grid;
   grid-gap: 10px;
-  justify-content: center;
 }
 
 @media (min-width: 620px) {
@@ -24,6 +23,7 @@
   background: white;
   border: solid;
   padding: 5px;
+  margin-top: 5px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }

@@ -31,7 +31,11 @@ class SearchForm extends Component {
           onChange={this.handleFormChanged}
           value={this.state.vinmonopoletId}
         />
-        <button className="submit-button" onClick={this.handleSubmitClicked}>
+        <button
+          className="submit-button"
+          onClick={this.handleSubmitClicked}
+          disabled={this.state.vinmonopoletId === ""}
+        >
           Search
         </button>
       </div>

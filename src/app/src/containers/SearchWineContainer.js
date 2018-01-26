@@ -6,6 +6,7 @@ import {
   SEARCH_WINE_REQUEST,
   CLEAR_SEARCH_LIST
 } from "../reducers/addWineReducer";
+import WineList from "../components/WineList";
 
 class SearchWineContainer extends Component {
   render() {
@@ -15,9 +16,13 @@ class SearchWineContainer extends Component {
 
         {this.props.searchedWines.length > 0 ? (
           <div className="wineList">
-            <div className="search-result">
-              <WineInfo wine={this.props.searchedWines[0]} />
-            </div>
+            {this.props.searchedWines.map((wine, index) => {
+              return (
+                <div className="search-result" key={index}>
+                  <WineInfo wine={wine} />
+                </div>
+              );
+            })}
           </div>
         ) : null}
       </div>
