@@ -1,28 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import isEmpty from "lodash/isEmpty";
 import SearchForm from "../components/SearchForm";
 import WineInfo from "../components/WineInfo";
 import {
   SEARCH_WINE_REQUEST,
-  CLEAR_SEARCH_LIST
+  ADD_WINE_REQUEST
 } from "../reducers/addWineReducer";
-import WineList from "../components/WineList";
 
 class SearchWineContainer extends Component {
   render() {
     return (
       <div>
-        <SearchForm searchWine={this.props.searchWine} />
+        <SearchForm
+          searchWine={this.props.searchWine}
+          addWine={this.props.addWine}
+        />
 
-        {this.props.searchedWines.length > 0 ? (
+        {!isEmpty(this.props.searchedWine) ? (
           <div className="wineList">
-            {this.props.searchedWines.map((wine, index) => {
-              return (
-                <div className="search-result" key={index}>
-                  <WineInfo wine={wine} />
-                </div>
-              );
-            })}
+            <div className="search-result">
+              <WineInfo wine={this.props.searchedWine} />
+            </div>
           </div>
         ) : null}
       </div>
@@ -31,17 +30,16 @@ class SearchWineContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  searchedWines: state.addWine.searchedWines
+  searchedWine: state.addWine.searchedWine
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    clearWines: () => {
-      dispatch({ type: CLEAR_SEARCH_LIST });
-    },
-
     searchWine: vinmonopoletId => {
       dispatch({ type: SEARCH_WINE_REQUEST, payload: { vinmonopoletId } });
+    },
+    addWine: vinmonopoletId => {
+      dispatch({ type: ADD_WINE_REQUEST, payload: { vinmonopoletId } });
     }
   };
 };

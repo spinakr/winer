@@ -3,6 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import reducers from "./reducers";
 import fetchMoreWinesSaga from "./sagas/fetchMoreWinesSaga";
 import searchWinesSaga from "./sagas/searchWinesSaga";
+import addWineSaga from "./sagas/addWineSaga";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -24,5 +25,6 @@ const store = createStore(reducers, initialState, composedEnhancers);
 
 sagaMiddleware.run(fetchMoreWinesSaga);
 sagaMiddleware.run(searchWinesSaga);
+sagaMiddleware.run(addWineSaga);
 
 export default store;

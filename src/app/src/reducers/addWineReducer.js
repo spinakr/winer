@@ -1,12 +1,16 @@
 export const SEARCH_WINE_REQUEST = "addWine/SEARCH_WINE_REQUEST";
 export const SEARCH_WINE_SUCCEEDED = "addWine/SEARCH_WINE_SUCCEEDED";
 export const SEARCH_WINE_FAILED = "addWine/SEARCH_WINE_FAILED";
-export const CLEAR_SEARCH_LIST = "addWine/CLEAR_SEARCH_LIST";
+export const ADD_WINE_REQUEST = "addWine/ADD_WINE_REQUEST";
+export const ADD_WINE_SUCCEEDED = "addWine/ADD_WINE_SUCCEEDED";
+export const ADD_WINE_FAILED = "addWine/ADD_WINE_FAILED";
 
 const initialState = {
-  searchingWines: false,
+  searchingWine: false,
   searchError: "",
-  searchedWines: []
+  searchedWine: {},
+  addingWine: false,
+  addWineError: ""
 };
 
 export default (state = initialState, action) => {
@@ -14,22 +18,38 @@ export default (state = initialState, action) => {
     case SEARCH_WINE_REQUEST:
       return {
         ...state,
-        searchingWines: true
+        searchingWine: true
       };
     case SEARCH_WINE_SUCCEEDED:
       return {
         ...state,
-        searchingWines: false,
-        searchedWines: [...state.searchedWines, action.payload.wine]
+        searchingWine: false,
+        searchedWine: action.payload.wine
       };
     case SEARCH_WINE_FAILED:
       return {
         ...state,
-        searchingWines: false,
+        searchingWine: false,
         searchError: action.payload.errorMessage
       };
-    case CLEAR_SEARCH_LIST:
-      return initialState;
+
+    case ADD_WINE_REQUEST:
+      return {
+        ...state,
+        addingWine: true
+      };
+    case ADD_WINE_SUCCEEDED:
+      return {
+        ...state,
+        addingWine: false,
+        searchedWine: {}
+      };
+    case ADD_WINE_FAILED:
+      return {
+        ...state,
+        addingWine: false,
+        addWineError: action.payload.errorMessage
+      };
     default:
       return initialState;
   }

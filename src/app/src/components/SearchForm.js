@@ -7,6 +7,7 @@ class SearchForm extends Component {
     this.state = { vinmonopoletId: "" };
     this.handleFormChanged = this.handleFormChanged.bind(this);
     this.handleSubmitClicked = this.handleSubmitClicked.bind(this);
+    this.handleSaveClicked = this.handleSaveClicked.bind(this);
   }
 
   handleFormChanged({ target }) {
@@ -17,6 +18,10 @@ class SearchForm extends Component {
 
   handleSubmitClicked() {
     this.props.searchWine(this.state.vinmonopoletId);
+  }
+
+  handleSaveClicked() {
+    this.props.addWine(this.state.vinmonopoletId);
     this.setState({ vinmonopoletId: "" });
   }
 
@@ -37,6 +42,9 @@ class SearchForm extends Component {
           disabled={this.state.vinmonopoletId === ""}
         >
           Search
+        </button>
+        <button className="submit-button" onClick={this.handleSaveClicked}>
+          Save
         </button>
       </div>
     );

@@ -45,12 +45,12 @@ namespace api.Controllers
             }
             return Ok(MapWineInfoToWine(wineInfo));
         }
-
         [HttpPost]
-        [Route("")]
-        public IActionResult AddNewWine([FromBody]AddWineRequest request)
+        [Route("{vinmonopoletId}")]
+        public IActionResult AddNewWine(string vinmonopoletId)
         {
-            var wineInfo = GetVinmonopoletWine(request.VinmonopoletId);
+            Console.WriteLine("ADD WINE: " + vinmonopoletId);
+            var wineInfo = GetVinmonopoletWine(vinmonopoletId);
 
             if (wineInfo is null)
             {
@@ -58,10 +58,16 @@ namespace api.Controllers
             }
 
             var wine = MapWineInfoToWine(wineInfo);
-            
-            //Save to db
-
+            SaveWine(wine);
             return Ok(wine);
+        }
+        
+        public void SaveWine(Wine wine)
+        {
+            using (var db = new SqlConnection(@"Server=db;Database=winer;User Id=SA; Password=Qwer1234*;"))
+            {
+                db.Insert(wine);
+            }
         }
 
         public VinmonopoletWine GetVinmonopoletWine(string vinmonopoletId)

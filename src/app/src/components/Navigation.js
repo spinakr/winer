@@ -18,9 +18,6 @@ const Navigation = () => {
       <Link to="/search">
         <i className="fa fa-search fa-3x nav-item" />
       </Link>
-      <Link to="/addnew">
-        <i className="fa fa-plus-square fa-3x nav-item" />
-      </Link>
     </div>
   );
 };
