@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Form.css";
+import "./SearchForm.css";
 
 class SearchForm extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class SearchForm extends Component {
 
   render() {
     return (
-      <div className="wine-form">
+      <div className="search-form">
         <input
           type="text"
           name="vinmonopoletId"

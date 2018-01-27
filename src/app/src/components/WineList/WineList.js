@@ -1,10 +1,10 @@
 import React from "react";
-import "./Components.css";
 import WineInfo from "./WineInfo";
+import "./WineList.css";
 
 const WineList = ({ wines }) => {
   return (
-    <div className="wineList">
+    <div className="wine-list">
       {wines.map(wine => {
         return <WineInfo key={wine.id} wine={wine} />;
       })}

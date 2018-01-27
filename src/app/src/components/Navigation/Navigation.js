@@ -1,5 +1,5 @@
 import React from "react";
-import "./Components.css";
+import "./Navigation.css";
 import "font-awesome/css/font-awesome.min.css";
 import { Link } from "react-router-dom";
 

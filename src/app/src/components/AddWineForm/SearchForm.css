@@ -3,13 +3,13 @@ button, input, select, textarea {
     font-size   : 100%;
 }
 
-.wine-form {
+.search-form {
     margin: 0 auto;
     width: 400px;
     margin-bottom: 10px;
 }
 
-.wine-form button {
+.search-form button {
     padding: 6px 10px;
     margin-left: 9px;
     color: black;
@@ -19,7 +19,7 @@ button, input, select, textarea {
     cursor: pointer;
 }
 
-.wine-form button:hover{
+.search-form button:hover{
     background: #ccc; 
 }
 
@@ -29,4 +29,14 @@ input[type=text] {
     margin-top: 8px;
     font-size: 25px;
     border: none;
+}
+
+.search-result {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.search-item {
+    grid-column: 2;
 }

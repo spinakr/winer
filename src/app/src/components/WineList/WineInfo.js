@@ -3,7 +3,7 @@ import React from "react";
 const WineInfo = ({ wine }) => {
   const vinmonopoletUrlBase = "https://bilder.vinmonopolet.no/cache/300x300-0/";
   return (
-    <div className="wineInfoContainer">
+    <div className="wine-info-container">
       <div className="col-one centered-text">
         <div style={{ minHeight: "70px" }}>
           <h3>{wine.name}</h3>

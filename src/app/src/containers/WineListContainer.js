@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import WineList from "../components/WineList";
+import WineList from "../components/WineList/WineList";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
   FETCH_MORE_WINES_REQUEST,

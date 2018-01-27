@@ -1,25 +1,21 @@
-.wineList {
+.wine-list {
   display: grid;
   grid-gap: 10px;
 }
 
 @media (min-width: 620px) {
-  .wineList {
+  .wine-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1000px) {
-  .wineList {
+  .wine-list {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-.search-result {
-  grid-column: 2;
-}
-
-.wineInfoContainer {
+.wine-info-container {
   background: white;
   border: solid;
   padding: 5px;
@@ -27,7 +23,6 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
-
 
 .col-one {
   grid-column: 1 / 5;
@@ -44,21 +39,4 @@
 
 .wine-image {
   height: 200px;
-}
-
-.footer {
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  height: 60px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background-color: rgba(117, 190, 218, 0.5);
-}
-
-.nav-item {
-  padding: 5px;
 }

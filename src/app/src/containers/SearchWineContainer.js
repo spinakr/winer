@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import isEmpty from "lodash/isEmpty";
-import SearchForm from "../components/SearchForm";
-import WineInfo from "../components/WineInfo";
+import SearchForm from "../components/AddWineForm/SearchForm";
+import WineInfo from "../components/WineList/WineInfo";
+import SearchResult from "../components/AddWineForm/SearchResult";
 import {
   SEARCH_WINE_REQUEST,
   ADD_WINE_REQUEST
@@ -18,11 +19,7 @@ class SearchWineContainer extends Component {
         />
 
         {!isEmpty(this.props.searchedWine) ? (
-          <div className="wineList">
-            <div className="search-result">
-              <WineInfo wine={this.props.searchedWine} />
-            </div>
-          </div>
+          <SearchResult wine={this.props.searchedWine} />
         ) : null}
       </div>
     );
