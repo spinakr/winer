@@ -6,21 +6,27 @@ button, input, select, textarea {
 .wine-form {
     margin: 0 auto;
     width: 400px;
+    margin-bottom: 10px;
+}
+
+.wine-form button {
+    padding: 6px 10px;
+    margin-left: 9px;
+    color: black;
+    background: #ddd;
+    font-size: 25px;
+    border: none;
+    cursor: pointer;
+}
+
+.wine-form button:hover{
+    background: #ccc; 
 }
 
 input[type=text] {
     width: 200px;
-    padding: 12px 20px;
-    box-sizing: border-box;
-}
-
-button {
-    background-color: white;
-    color: black;
-    border: 2px solid #e7e7e7; 
-
-    padding: 10px 25px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 25px;
+    border: none;
 }

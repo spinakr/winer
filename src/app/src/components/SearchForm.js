@@ -28,7 +28,6 @@ class SearchForm extends Component {
   render() {
     return (
       <div className="wine-form">
-        <h2>Search Wine</h2>
         <input
           type="text"
           name="vinmonopoletId"
@@ -41,10 +40,10 @@ class SearchForm extends Component {
           onClick={this.handleSubmitClicked}
           disabled={this.state.vinmonopoletId === ""}
         >
-          Search
+          <i className="fa fa-search" />
         </button>
         <button className="submit-button" onClick={this.handleSaveClicked}>
-          Save
+          <i className="fa fa-floppy-o" />
         </button>
       </div>
     );
