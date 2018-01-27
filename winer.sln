@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "src\api\api.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "database", "src\database\database.csproj", "{F9A31C7A-C436-48FB-8655-A4C3CFC82E13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "azuremigration", "src\azuremigration\azuremigration.csproj", "{3F5D4DCD-AAC1-4077-BBD1-13D6DE70E1DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "azuremigration", "datamigration\azuremigration\azuremigration.csproj", "{3F5D4DCD-AAC1-4077-BBD1-13D6DE70E1DF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "domain", "src\domain\domain.csproj", "{1C75DD9B-2ABE-4FAB-98B8-AE274272C765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vinmonopoletDataImport", "src\vinmonopoletDataImport\vinmonopoletDataImport.csproj", "{4BF9545C-9EF8-4AAC-A97F-8B3C5A708D50}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vinmonopoletDataImport", "datamigration\vinmonopoletDataImport\vinmonopoletDataImport.csproj", "{4BF9545C-9EF8-4AAC-A97F-8B3C5A708D50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

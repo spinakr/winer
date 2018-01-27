@@ -13,7 +13,7 @@ namespace azuremigration
     {
         static void Main(string[] args)
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=furiouskangaroo;AccountKey=fkMRtUfi8DD5QKiux+8xVIZRJNzWPI4jh48lqHVQonT7DFsA1/XPxqrdjjElZxLRuUdAgmfKecZF9cI1Z5kVXA==;EndpointSuffix=core.windows.net");
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse("");
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
             CloudTable table = tableClient.GetTableReference("wines");
 
@@ -23,7 +23,6 @@ namespace azuremigration
 
             var result = table.ExecuteQuerySegmentedAsync(query, continuationToken).Result;
 
-            // using (var db = new SqlConnection(@"Server=45.55.68.40;Database=winer;User Id=SA; Password=Qwer1234*;"))
             using (var db = new SqlConnection(@"Server=localhost;Database=winer;User Id=SA; Password=Qwer1234*;"))
             {
                 foreach (var wine in result)
