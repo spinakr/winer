@@ -1,5 +1,5 @@
 import React from "react";
-import WineInfo from "../WineList/WineInfo";
+import WineInfo from "../WineInfo/WineInfo";
 import "./SearchForm.css";
 
 const SearchResult = ({ wine }) => {

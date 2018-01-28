@@ -1,0 +1,36 @@
+.wine-info-container {
+  background: white;
+  border: solid;
+  padding: 5px;
+  margin-top: 5px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.col-one {
+  grid-column: 1 / 5;
+  grid-row: 1;
+}
+
+.col-two {
+  grid-column: 5;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.wine-image {
+  height: 200px;
+}
+
+.handle-button{
+    padding: 6px 10px;
+    margin-left: 9px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+.handle-button:hover{
+    background: #ccc; 
+}

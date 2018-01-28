@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -32,20 +33,31 @@ namespace api.Storage
 
         public void MovedToArchive(int id)
         {
-            UpdateStatus(id, 2);
+            using (var db = _connectionProvider.GetConnection())
+            {
+                var wine = db.Get<Wine>(id);
+                wine.Status = 2;
+                db.Update(wine);
+
+                var tastingNote = new TastingNote
+                {
+                    WineId = wine.Id,
+                    Note = "",
+                    Occation = "",
+                    ConsumptionDate = DateTime.Now,
+                    Score = 0
+                };
+
+                db.Insert(tastingNote);
+            }
         }
 
         public void MovedToInventory(int id)
         {
-            UpdateStatus(id, 1);
-        }
-
-        public void UpdateStatus(int id, int newStatus)
-        {
             using (var db = _connectionProvider.GetConnection())
             {
                 var wine = db.Get<Wine>(id);
-                wine.Status = newStatus;
+                wine.Status = 1;
                 db.Update(wine);
             }
         }

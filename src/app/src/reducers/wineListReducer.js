@@ -2,6 +2,12 @@ export const FETCH_MORE_WINES_REQUEST = "wineList/FETCH_MORE_WINES_REQUEST";
 export const FETCH_MORE_WINES_SUCCEEDED = "wineList/FETCH_MORE_WINES_SUCCEEDED";
 export const FETCH_MORE_WINES_FAILED = "wineList/FETCH_MORE_WINES_FAILED";
 export const CLEAR_WINES_LIST = "wineList/CLEAR_WINES_LIST";
+export const MOVE_WINE_TO_ARCHIVE_REQUEST =
+  "wineList/MOVE_WINE_TO_ARCHIVE_REQUEST";
+export const MOVE_WINE_TO_ARCHIVE_SUCCESS =
+  "wineList/MOVE_WINE_TO_ARCHIVE_SUCCESS";
+export const MOVE_WINE_TO_ARCHIVE_FAILED =
+  "wineList/MOVE_WINE_TO_ARCHIVE_FAILED";
 
 const initialState = {
   fetchingWines: false,
@@ -31,6 +37,22 @@ export default (state = initialState, action) => {
         ...state,
         fetchingWines: false,
         fetchError: action.payload.errorMessage
+      };
+
+    case MOVE_WINE_TO_ARCHIVE_REQUEST:
+      return {
+        ...state
+      };
+    case MOVE_WINE_TO_ARCHIVE_SUCCESS:
+      return {
+        ...state,
+        wines: state.wines.filter(wine => {
+          return wine.id !== action.payload.wineId;
+        })
+      };
+    case MOVE_WINE_TO_ARCHIVE_FAILED:
+      return {
+        ...state
       };
     case CLEAR_WINES_LIST:
       return initialState;

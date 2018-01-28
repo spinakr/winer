@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import isEmpty from "lodash/isEmpty";
 import SearchForm from "../components/AddWineForm/SearchForm";
-import WineInfo from "../components/WineList/WineInfo";
 import SearchResult from "../components/AddWineForm/SearchResult";
 import {
   SEARCH_WINE_REQUEST,

@@ -19,6 +19,21 @@ const writeService = {
           error
         };
       });
+  },
+  moveToArchive: wineId => {
+    return api
+      .post(`${wineId}/archive`)
+      .then(response => {
+        return {
+          success: true
+        };
+      })
+      .catch(error => {
+        return {
+          success: false,
+          error
+        };
+      });
   }
 };
 

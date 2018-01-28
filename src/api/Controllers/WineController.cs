@@ -65,5 +65,13 @@ namespace api.Controllers
             _writeRepo.SaveWine(wine);
             return Ok(wine);
         }
+        
+        [HttpPost]
+        [Route("{wineId}/archive")]
+        public IActionResult MoveToArchive(int wineId)
+        {
+            _writeRepo.MovedToArchive(wineId);
+            return Ok();
+        }
     }
 }

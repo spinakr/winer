@@ -36,13 +36,12 @@ class SearchForm extends Component {
           value={this.state.vinmonopoletId}
         />
         <button
-          className="submit-button"
           onClick={this.handleSubmitClicked}
           disabled={this.state.vinmonopoletId === ""}
         >
           <i className="fa fa-search" />
         </button>
-        <button className="submit-button" onClick={this.handleSaveClicked}>
+        <button onClick={this.handleSaveClicked}>
           <i className="fa fa-floppy-o" />
         </button>
       </div>
