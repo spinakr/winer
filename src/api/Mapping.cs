@@ -11,7 +11,7 @@ namespace api
             {
                 VinmonopoletId = wineInfo.VinmonopoletId,
                 Name = wineInfo.Navn,
-                Status = 1,
+                Status = 0,
                 Vintage = wineInfo.Argang,
                 Type = wineInfo.Varetype,
                 Producer = wineInfo.Produsent,
