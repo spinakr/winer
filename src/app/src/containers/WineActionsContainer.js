@@ -6,10 +6,12 @@ import { MOVE_WINE_TO_ARCHIVE_REQUEST } from "../reducers/wineListReducer";
 const mapDispatchToProps = dispatch => {
   return {
     archiveWine: wineId => {
-      dispatch({
-        type: MOVE_WINE_TO_ARCHIVE_REQUEST,
-        payload: { wineId }
-      });
+      if (window.confirm("Sikker på at du vil arkivere denne vinen?")) {
+        dispatch({
+          type: MOVE_WINE_TO_ARCHIVE_REQUEST,
+          payload: { wineId }
+        });
+      }
     }
   };
 };
