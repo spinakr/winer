@@ -62,6 +62,7 @@ namespace api.Controllers
             var wineInfo = _readRepo.GetVinmonopoletWine(vinmonopoletId);
             if (wineInfo is null) return NotFound("Wine not found in vinmonopolet data");
             var wine = wineInfo.MapToWineEntity();
+            wine.Status = 1;
             _writeRepo.SaveWine(wine);
             return Ok(wine);
         }
