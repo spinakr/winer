@@ -11,6 +11,7 @@ namespace api.Storage
     {
         void SaveWine(Wine wine);
         void MovedToArchive(int id);
+        void DeleteWine(int id);
         void MovedToInventory(int id);
     }
 
@@ -59,6 +60,15 @@ namespace api.Storage
                 var wine = db.Get<Wine>(id);
                 wine.Status = 1;
                 db.Update(wine);
+            }
+        }
+
+        public void DeleteWine(int id)
+        {
+            using (var db = _connectionProvider.GetConnection())
+            {
+                var wine = db.Get<Wine>(id);
+                db.Delete(wine);
             }
         }
     }

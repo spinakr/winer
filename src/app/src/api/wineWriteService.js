@@ -34,6 +34,21 @@ const writeService = {
           error
         };
       });
+  },
+  moveToInventory: wineId => {
+    return api
+      .post(`${wineId}/inventory`)
+      .then(response => {
+        return {
+          success: true
+        };
+      })
+      .catch(error => {
+        return {
+          success: false,
+          error
+        };
+      });
   }
 };
 

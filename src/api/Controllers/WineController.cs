@@ -74,5 +74,21 @@ namespace api.Controllers
             _writeRepo.MovedToArchive(wineId);
             return Ok();
         }
+        
+        [HttpPost]
+        [Route("{wineId}/delete")]
+        public IActionResult DeleteWine(int wineId)
+        {
+            _writeRepo.DeleteWine(wineId);
+            return Ok();
+        }
+        
+        [HttpPost]
+        [Route("{wineId}/inventory")]
+        public IActionResult MoveToinventory(int wineId)
+        {
+            _writeRepo.MovedToInventory(wineId);
+            return Ok();
+        }
     }
 }
