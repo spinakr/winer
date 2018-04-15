@@ -1,19 +1,19 @@
 version: "3"
 services:
-    # web:
-    #     build: src/app
-    #     ports:
-    #         - "5000:5000"
-    #     depends_on:
-    #         - api
-    api:
-        build: src/api
+    web:
+        build: src/Client
         ports:
-            - "80:80"
+            - "80:5000"
+        depends_on:
+            - api
+    api:
+        build: src/Server/Api
+        ports:
+            - "3000:80"
         depends_on:
             - db
     migration:
-        build: "src/database"
+        build: "src/Server/Database"
         depends_on: 
             - db
     db:

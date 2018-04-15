@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using DbUp;
 
-namespace database
+namespace Winer.Database
 {
     public class Program
     {

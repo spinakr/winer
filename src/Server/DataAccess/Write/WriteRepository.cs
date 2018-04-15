@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
-using domain;
+using Winer.DataAccess.Read;
 
-namespace api.Storage
+namespace Winer.DataAccess.Write
 {
     public interface IWriteRepository
     {
-        void SaveWine(Wine wine);
+        void SaveWine(NewWine wine);
         void MovedToArchive(int id);
         void DeleteWine(int id);
         void MovedToInventory(int id);
@@ -24,7 +24,7 @@ namespace api.Storage
             _connectionProvider = connectionProvider;
         }
         
-        public void SaveWine(Wine wine)
+        public void SaveWine(NewWine wine)
         {
             using (var db = _connectionProvider.GetConnection())
             {

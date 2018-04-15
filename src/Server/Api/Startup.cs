@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using api.Storage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Winer.DataAccess;
+using Winer.DataAccess.Read;
+using Winer.DataAccess.Write;
 
-namespace api
+namespace Winer.Api
 {
     public class Startup
     {
@@ -39,8 +41,6 @@ namespace api
                 app.UseDeveloperExceptionPage();
             }
             app.UseMvc();
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
         }
     }
 }

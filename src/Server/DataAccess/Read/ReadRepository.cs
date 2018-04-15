@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
-using domain;
 
-namespace api.Storage
+namespace Winer.DataAccess.Read
 {
     public interface IReadRepository
     {

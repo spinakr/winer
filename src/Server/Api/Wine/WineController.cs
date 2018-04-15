@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using api.Storage;
 using Dapper;
-using domain;
 using Microsoft.AspNetCore.Mvc;
+using Winer.DataAccess.Read;
+using Winer.DataAccess.Write;
 
-namespace api.Controllers
+namespace Winer.Api.Wine
 {
     [Route("api/wine")]
     public class WineController : Controller

@@ -1,13 +1,14 @@
 using System;
-using domain;
+using Winer.DataAccess.Read;
+using Winer.DataAccess.Write;
 
-namespace api 
+namespace Winer.Api.Wine
 {
     public static class Mapping 
     {
-        public static Wine MapToWineEntity(this VinmonopoletWine wineInfo)
+        public static NewWine MapToWineEntity(this DataAccess.Read.VinmonopoletWine wineInfo)
         {
-            return new Wine
+            return new NewWine
             {
                 VinmonopoletId = wineInfo.VinmonopoletId,
                 Name = wineInfo.Navn,

@@ -1,7 +1,6 @@
-
 using Dapper;
 
-namespace domain
+namespace Winer.DataAccess.Write
 {
     [Table("VinmonopoletWine")]
     public class VinmonopoletWine

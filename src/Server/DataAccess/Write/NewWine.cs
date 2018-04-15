@@ -1,8 +1,10 @@
 ﻿using System;
+using Dapper;
 
-namespace domain
+namespace Winer.DataAccess.Write
 {
-    public class Wine
+    [Table("Wine")]
+    public class NewWine
     {
         public int Id { get; set; }
         public string VinmonopoletId { get; set; }

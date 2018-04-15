@@ -1,7 +1,7 @@
 
 using System.Data.SqlClient;
 
-namespace api.Storage
+namespace Winer.DataAccess
 {
     public interface IConnectionProvider
     {

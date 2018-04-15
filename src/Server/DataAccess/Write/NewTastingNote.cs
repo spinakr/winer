@@ -1,7 +1,9 @@
 using System;
+using Dapper;
 
-namespace domain
+namespace Winer.DataAccess.Write
 {
+    [Table("TastingNote")]
     public class TastingNote
     {
         public int Id { get; set; }
