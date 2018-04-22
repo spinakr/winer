@@ -3,12 +3,14 @@
 open Fake
 open System
 
-let apiPath = "../src/api/" |> FullName
-let apiOutPath = "../src/api/out" |> FullName
-let appPath = "../src/app/" |> FullName
-let appOutPath = "../src/app/build" |> FullName
-let databasePath = "../src/database/" |> FullName
-let databaseOutPath = "../src/database/out" |> FullName
+let appPath = "../src/Client/" |> FullName
+let serverPath = "../src/Server/" |> FullName
+let databasePath = "../src/Server/Database" |> FullName
+let apiPath = "../src/Server/Api" |> FullName
+
+let appOutPath = "../src/Client/build/" |> FullName
+let apiOutPath = "../src/Server/Api/bin/Release/netcoreapp2.0/publish/" |> FullName
+let databaseOutPath = "../src/Server/Database/bin/Release/netcoreapp2.0/publish/" |> FullName
 
 let mutable dotnetExePath = "dotnet"
 
@@ -30,31 +32,26 @@ let runYarn workingDir args =
 
 //-----Tasks-----
 Target "InstallDotNetCore" (fun _ ->
-    dotnetExePath <- DotNetCli.InstallDotNetSDK "2.1.3"
+    dotnetExePath <- DotNetCli.InstallDotNetSDK "2.1.4"
 )
 
 Target "Clean" ( fun _ -> 
     CleanDirs [apiOutPath; appOutPath; databaseOutPath]
 )
 
-Target "BuildApp" (fun _ ->
+Target "BuildClient" (fun _ ->
     runYarn appPath ""
     runYarn appPath "build"
     CreateDir (apiOutPath + "/wwwroot")
     CopyDir (apiOutPath + "/wwwroot") appOutPath allFiles
 )
 
-Target "BuildDatabase" (fun _ ->
-    let buildArgs = "publish -c Release -o \"" + FullName databaseOutPath + "\""
-    runDotnet databasePath buildArgs
+Target "BuildServer" (fun _ ->
+    let buildArgs = "publish -c Release Server.sln" 
+    runDotnet serverPath buildArgs
 )
 
-Target "BuildApi" (fun _ ->
-    let buildArgs = "publish -c Release -o \"" + FullName apiOutPath + "\""
-    runDotnet apiPath buildArgs
-)
-
-Target "TestApp" (fun _ -> 
+Target "TestClient" (fun _ -> 
     ()
 )
 
@@ -82,12 +79,15 @@ Target "RunComposeUp" (fun _ ->
 
 //Run for development
 Target "RunDev" (fun _ ->
+    printfn "Running database migrations"
+    runDotnet databasePath "run"
     let runWebServer = async { runDotnet apiPath "watch run" }
     let runWebApp = async { runYarn appPath "start" }
     let openBrowser = async {
         System.Threading.Thread.Sleep(5000)
         Diagnostics.Process.Start("http://localhost:4000/#") |> ignore }
 
+    printfn "Starting server and client dev servers"
     Async.Parallel [| runWebServer; runWebApp; openBrowser |]
     |> Async.RunSynchronously
     |> ignore
@@ -96,21 +96,23 @@ Target "RunDev" (fun _ ->
 //-----Pipeline definition-----
 
 Target "Build" DoNothing
+Target "Test" DoNothing
 Target "Release" DoNothing
 
 "Clean"
     ==> "InstallDotNetCore"
-    ==> "BuildApp"
-    ==> "BuildDatabase"
-    ==> "BuildApi"
-    ==> "TestApp"
+    ==> "BuildServer"
+    ==> "BuildClient"
+    ==> "TestClient"
     ==> "TestServer"
     ==> "BuildDockerImages"
     ==> "RunComposeUp"
 
+"TestServer"
+    ==> "Test"
 
-"BuildApi"
-    ==>"Build"
+"BuildClient"
+    ==> "Build"
 
 "RunComposeUp"
     ==> "Release"
